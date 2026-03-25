@@ -2,11 +2,8 @@ name: Build & Release
 
 on:
   push:
-    branches: [ main, master ]
     tags:
       - 'v*'
-  pull_request:
-    branches: [ main, master ]
 
 jobs:
   build-macos:
@@ -23,15 +20,22 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install pyinstaller
-        pip install -r requirements.txt
+        pip install schedule requests
     
     - name: Build macOS app
       run: |
-        python build_mac.py
+        pyinstaller --onefile --windowed \
+          --name StockMonitor \
+          --add-data "config.example.json:." \
+          --hidden-import schedule \
+          --hidden-import requests \
+          --hidden-import sqlite3 \
+          stock_monitor.py
     
     - name: Package macOS app
       run: |
-        cd dist && zip -r StockMonitor-mac.zip StockMonitor.app
+        cd dist && zip -r StockMonitor-mac.zip StockMonitor
+        ls -la
     
     - name: Upload macOS artifact
       uses: actions/upload-artifact@v3
@@ -53,16 +57,25 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install pyinstaller
-        pip install -r requirements.txt
+        pip install schedule requests
     
     - name: Build Windows executable
       run: |
-        python build_windows.py
+        pyinstaller --onefile --windowed `
+          --name StockMonitor `
+          --add-data "config.example.json;." `
+          --hidden-import schedule `
+          --hidden-import requests `
+          --hidden-import sqlite3 `
+          stock_monitor.py
+      shell: pwsh
     
     - name: Package Windows exe
       run: |
         cd dist
         7z a StockMonitor-windows.zip StockMonitor.exe
+        dir
+      shell: cmd
     
     - name: Upload Windows artifact
       uses: actions/upload-artifact@v3
@@ -73,7 +86,6 @@ jobs:
   create-release:
     needs: [build-macos, build-windows]
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/v')
     
     steps:
     - name: Download macOS artifact
@@ -87,6 +99,9 @@ jobs:
       with:
         name: StockMonitor-windows
         path: dist/
+    
+    - name: List files
+      run: ls -la dist/
     
     - name: Create Release
       uses: softprops/action-gh-release@v1
@@ -105,26 +120,9 @@ jobs:
           | Windows | StockMonitor-windows.zip | ~12MB |
           
           ## 🚀 Quick Start
-          1. Download the zip for your platform
+          1. Download for your platform
           2. Extract and run
           3. Enter Bark Key on first run
           4. Done!
-          
-          ---
-          
-          🎉 新版本发布！
-          
-          ## 📦 下载
-          
-          | 平台 | 文件 | 大小 |
-          |------|------|------|
-          | macOS | StockMonitor-mac.zip | ~17MB |
-          | Windows | StockMonitor-windows.zip | ~12MB |
-          
-          ## 🚀 快速开始
-          1. 下载对应平台的 zip 文件
-          2. 解压并运行
-          3. 首次运行输入 Bark Key
-          4. 完成！
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
