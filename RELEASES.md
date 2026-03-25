@@ -12,89 +12,129 @@ No Python installation required! Just download and run.
 
 ---
 
+## 📥 Download Links / 下载链接
+
+| Version | macOS | Windows | Date |
+|---------|-------|---------|------|
+| **v1.0.0** | [StockMonitor-mac.zip](https://github.com/AiYuSherry/stock-monitor/releases/download/v1.0.0/StockMonitor-mac.zip) (17MB) | Build from source | 2026-03-25 |
+
+📋 [View All Releases](../../releases)
+
+---
+
 ## macOS
 
-### Download / 下载
+### System Requirements / 系统要求
 
-Download `StockMonitor-mac.zip` from [Releases](../../releases)
+- macOS 10.15 (Catalina) or later
+- Intel or Apple Silicon (M1/M2/M3)
 
-从 [Releases](../../releases) 下载 `StockMonitor-mac.zip`
+### Install & Run / 安装与运行
 
-### Install / 安装
+1. **Download** / 下载
+   ```bash
+   curl -L -o StockMonitor-mac.zip https://github.com/AiYuSherry/stock-monitor/releases/download/v1.0.0/StockMonitor-mac.zip
+   ```
+   Or click the link above / 或直接点击上方链接
 
-1. **Unzip** / 解压
+2. **Unzip** / 解压
    ```bash
    unzip StockMonitor-mac.zip
    ```
+   Or double-click the zip file / 或双击 zip 文件
 
-2. **Run** / 运行
+3. **Run** / 运行
    - Double-click `StockMonitor.app`
    - 双击 `StockMonitor.app`
 
-3. **First Time Setup** / 首次配置
-   - Enter your Bark Key
-   - 输入你的 Bark Key
-   - Select stocks to monitor
-   - 选择要监测的股票
+4. **First Time Setup** / 首次配置
+   - A terminal window will appear
+   - 会弹出终端窗口
+   - Enter your Bark Key (get from Bark App on iPhone)
+   - 输入 Bark Key（从 iPhone 上的 Bark App 获取）
+   - Select stocks to monitor or use defaults
+   - 选择要监测的股票或使用默认列表
 
-4. **Done!** / 完成！
-   - The program will start monitoring automatically
-   - 程序将自动开始监测
+5. **Done!** / 完成！
+   - The program runs in the background
+   - 程序在后台运行
+   - You'll receive push notifications on your iPhone
+   - 你将在 iPhone 上收到推送通知
 
-### Note / 注意事项
+### Troubleshooting / 故障排除
 
-If you see "Cannot open because it's from an unidentified developer":
+#### "Cannot open because it's from an unidentified developer"
+**"无法打开，因为来自未识别的开发者"**
 
-如果提示"无法打开，因为来自未识别的开发者"：
+1. Right-click (or Control+click) the app / 右键（或 Control+点击）应用
+2. Select "Open" / 选择"打开"
+3. Click "Open" in the dialog / 在对话框中点击"打开"
 
-1. Right-click (or Control+click) the app
-2. Select "Open"
-3. Click "Open" in the dialog
+Or run in Terminal / 或在终端运行：
+```bash
+xattr -cr StockMonitor.app
+```
+
+#### "App is damaged"
+**"应用已损坏"**
+
+```bash
+xattr -cr /Applications/StockMonitor.app
+```
 
 ---
 
 ## Windows
 
-### Download / 下载
+### Status / 状态
 
-Download `StockMonitor-windows.zip` from [Releases](../../releases)
+🔨 **Build from source required**
 
-从 [Releases](../../releases) 下载 `StockMonitor-windows.zip`
+Windows version currently requires building from source on a Windows PC.
 
-### Install / 安装
+Windows 版本目前需要在 Windows 电脑上从源码构建。
 
-1. **Unzip** / 解压
-   - Right-click the zip file → "Extract All"
-   - 右键 zip 文件 → "解压全部"
+### Build Instructions / 构建说明
 
-2. **Run** / 运行
-   - Double-click `StockMonitor.exe`
-   - 双击 `StockMonitor.exe`
+1. **Install Python** / 安装 Python
+   - Download from [python.org](https://python.org)
+   - 从 [python.org](https://python.org) 下载
+   - Make sure to check "Add Python to PATH"
+   - 确保勾选"Add Python to PATH"
 
-3. **First Time Setup** / 首次配置
-   - A black window will appear for configuration
-   - 会弹出黑色窗口进行配置
-   - Enter your Bark Key and stock list
-   - 输入 Bark Key 和自选股列表
+2. **Clone Repository** / 克隆仓库
+   ```bash
+   git clone https://github.com/AiYuSherry/stock-monitor.git
+   cd stock-monitor
+   ```
 
-4. **Done!** / 完成！
-   - The program will run in the background
-   - 程序将在后台运行
-   - You'll receive push notifications on your iPhone
-   - 你将在 iPhone 上收到推送通知
+3. **Install Dependencies** / 安装依赖
+   ```bash
+   pip install pyinstaller
+   ```
 
-### Note / 注意事项
+4. **Build** / 构建
+   ```bash
+   python build_windows.py
+   ```
 
-- Windows may show a security warning. Click "More info" → "Run anyway"
-- Windows 可能会显示安全警告，点击"更多信息" → "仍要运行"
+5. **Output** / 输出
+   - Located in `dist/StockMonitor.exe`
+   - 位于 `dist/StockMonitor.exe`
+
+### Want to contribute a Windows build? / 想贡献 Windows 构建版本？
+
+If you build the Windows version, consider sharing it by:
+- Creating a Pull Request with the binary
+- Or opening an Issue with the file attached
+
+如果您构建了 Windows 版本，考虑通过以下方式分享：
+- 创建包含二进制文件的 Pull Request
+- 或在 Issue 中附加文件
 
 ---
 
-## 🛠️ Build from Source / 从源码构建
-
-If you prefer to build from source:
-
-如果你更喜欢从源码构建：
+## 🛠️ Advanced: Build from Source / 高级：从源码构建
 
 ### Prerequisites / 前置要求
 
@@ -110,10 +150,15 @@ python3 build_mac.py
 
 Output: `dist/StockMonitor.app`
 
+Package for distribution / 打包分发：
+```bash
+cd dist && zip -r StockMonitor-mac.zip StockMonitor.app
+```
+
 ### Windows Build / Windows 构建
 
 ```bash
-python3 build_windows.py
+python build_windows.py
 ```
 
 Output: `dist/StockMonitor.exe`
@@ -126,55 +171,88 @@ Once configured, the program will:
 
 配置完成后，程序将：
 
-1. **Monitor your stocks** 24/7
-   全天候监测你的股票
+### Automatic Monitoring / 自动监测
 
-2. **Send push notifications** at:
-   在以下时间发送推送：
-   - 09:30 - Market Open / 开盘
-   - 11:25 - Morning Close / 上午收盘
-   - 13:00 - Afternoon Open / 下午开盘
-   - 14:55 - Pre-close / 收盘前
-   - 15:00 - Daily Summary / 全日总结
+1. **Monitor your stocks** 24/7 / 全天候监测你的股票
 
-3. **Track profit/loss** based on your cost price
-   根据成本价追踪盈亏
+2. **Send push notifications** at: / 在以下时间发送推送：
+   | Time | Event |
+   |------|-------|
+   | 09:30 | 🌅 Market Open / 开盘 |
+   | 11:25 | 📢 Morning Close / 上午收盘 |
+   | 13:00 | 📢 Afternoon Open / 下午开盘 |
+   | 14:55 | 📢 Pre-close / 收盘前 |
+   | 15:00 | 📊 Daily Summary / 全日总结 |
+
+3. **Track profit/loss** based on your cost price / 根据成本价追踪盈亏
+
+### Data Files / 数据文件
+
+The program creates these files in the same folder:
+
+程序会在同一文件夹创建以下文件：
+
+| File | Description |
+|------|-------------|
+| `config.json` | Your configuration / 你的配置 |
+| `stock_data.db` | Historical price database / 历史价格数据库 |
+| `stock_monitor.log` | Program logs / 程序日志 |
+
+### Modifying Configuration / 修改配置
+
+Simply edit `config.json` to:
+- Change stocks / 更改股票
+- Update Bark Key / 更新 Bark Key
+- Adjust alert thresholds / 调整告警阈值
+
+No restart needed - changes take effect immediately!
+
+无需重启 - 更改立即生效！
 
 ---
 
 ## 🔧 Troubleshooting / 故障排除
 
-### macOS: "App is damaged" / 应用已损坏
-
-Run in Terminal / 在终端运行：
-```bash
-xattr -cr /Applications/StockMonitor.app
-```
-
-### Windows: Antivirus blocks the app / 杀毒软件拦截
-
-Add the app to your antivirus whitelist:
-将应用添加到杀毒软件白名单
-
 ### Cannot receive notifications / 无法收到通知
 
-1. Check your Bark Key is correct
-   检查 Bark Key 是否正确
+1. Check your Bark Key is correct in `config.json`
+   检查 `config.json` 中的 Bark Key 是否正确
+
 2. Ensure Bark App is installed on your iPhone
    确保 iPhone 上安装了 Bark App
+
 3. Check your internet connection
    检查网络连接
+
+4. Check the log file `stock_monitor.log`
+   检查日志文件 `stock_monitor.log`
+
+### Program crashes / 程序崩溃
+
+1. Check `stock_monitor.log` for error messages
+   检查 `stock_monitor.log` 中的错误信息
+
+2. Ensure `config.json` is valid JSON
+   确保 `config.json` 是有效的 JSON 格式
+
+3. Try deleting `config.json` and reconfiguring
+   尝试删除 `config.json` 并重新配置
 
 ---
 
 ## 💡 Tips / 提示
 
-- The configuration file is saved as `config.json` in the same folder
-  配置文件保存在同一文件夹的 `config.json`
-- You can edit it anytime to change stocks or settings
-  可以随时编辑修改股票或设置
-- The database is saved as `stock_data.db`
-  数据库保存在 `stock_data.db`
+- **Silent mode**: Default is silent push (no sound). Change `bark_sound` in config to enable sound.
+  - 默认静音推送（无声音）。在配置中更改 `bark_sound` 可启用声音。
+
+- **Trading days only**: Set `trading_days_only: false` to run every day
+  - 设置 `trading_days_only: false` 可每天运行（不仅交易日）
+
+- **Multiple stocks**: You can monitor unlimited stocks
+  - 可以监测无限数量的股票
+
+- **Cost tracking**: Set `cost_price` to track your profit/loss
+  - 设置 `cost_price` 可追踪你的盈亏
 
 ---
 

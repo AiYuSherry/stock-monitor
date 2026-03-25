@@ -1,0 +1,3 @@
+([('StockMonitor',
+   '/Users/huziyang/Desktop/计算机/stock-monitor/dist/StockMonitor',
+   'EXECUTABLE')],)

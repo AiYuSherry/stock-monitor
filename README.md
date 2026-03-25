@@ -12,14 +12,53 @@ A Python-based stock monitoring program that tracks stock/ETF prices in real-tim
 
 **No installation required!** Download and run directly.
 
-**无需安装！**下载直接运行。
+**无需安装 Python！**下载直接运行。
 
-| Platform | Download | Size |
-|----------|----------|------|
-| **macOS** | [StockMonitor-mac.zip](../../releases) | ~15MB |
-| **Windows** | [StockMonitor-windows.zip](../../releases) | ~12MB |
+| Platform | Download | Size | Status |
+|----------|----------|------|--------|
+| **macOS** | [StockMonitor-mac.zip](https://github.com/AiYuSherry/stock-monitor/releases/download/v1.0.0/StockMonitor-mac.zip) | ~17MB | ✅ Available |
+| **Windows** | StockMonitor-windows.zip | ~12MB | 🔨 Build from source |
 
 📖 [Installation Guide / 安装指南](RELEASES.md)
+
+> **Windows Users:** Windows version needs to be built from source on a Windows PC. See [build_windows.py](build_windows.py) or wait for community contribution.
+>
+> **Windows 用户：** Windows 版本需要在 Windows 电脑上从源码构建。查看 [build_windows.py](build_windows.py) 或等待社区贡献。
+
+---
+
+## 🚀 Quick Start / 快速开始
+
+### For End Users / 对于最终用户
+
+1. **Download** / 下载
+   - Click the download link above for your platform
+   - 点击上方对应平台的下载链接
+
+2. **Unzip** / 解压
+   - macOS: Double-click the zip file
+   - macOS: 双击 zip 文件解压
+
+3. **Run** / 运行
+   - macOS: Double-click `StockMonitor.app`
+   - macOS: 双击 `StockMonitor.app`
+
+4. **Configure** / 配置
+   - First run will prompt for Bark Key and stock list
+   - 首次运行会提示输入 Bark Key 和自选股列表
+
+5. **Done!** / 完成！
+   - The program will start monitoring automatically
+   - 程序将自动开始监测，推送通知到手机
+
+### For Developers / 对于开发者
+
+```bash
+git clone https://github.com/AiYuSherry/stock-monitor.git
+cd stock-monitor
+pip3 install -r requirements.txt
+python3 stock_monitor.py
+```
 
 ---
 
@@ -32,51 +71,17 @@ A Python-based stock monitoring program that tracks stock/ETF prices in real-tim
 - ⏰ **Scheduled Alerts**: 5 push notifications throughout the trading day
 - 💾 **Data Persistence**: SQLite database for historical prices
 - ☁️ **Cloud Server Support**: 24/7 operation on cloud servers
-
-### 🚀 Quick Start
-
-#### 1. Clone & Install
-
-```bash
-git clone https://github.com/yourusername/stock-monitor.git
-cd stock-monitor
-pip3 install -r requirements.txt
-```
-
-#### 2. Configure
-
-```bash
-python3 setup.py
-```
-
-Enter your Bark Key and stock list when prompted.
-
-#### 3. Run
-
-```bash
-python3 stock_monitor.py
-```
+- 🔧 **Easy Configuration**: First-run setup wizard
 
 ### 📱 Push Schedule
 
-| Time | Type |
-|------|------|
-| 09:30 | 🌅 Market Open |
-| 11:25 | 📢 Morning Close |
-| 13:00 | 📢 Afternoon Open |
-| 14:55 | 📢 Pre-close |
-| 15:00 | 📊 Daily Summary |
-
-### ☁️ Cloud Deployment
-
-```bash
-# Upload to server
-scp stock-monitor-deploy.tar.gz root@server:/opt/
-
-# Setup systemd auto-start
-systemctl enable stock-monitor
-systemctl start stock-monitor
-```
+| Time | Type | Description |
+|------|------|-------------|
+| 09:30 | 🌅 Market Open | Opening prices and initial status |
+| 11:25 | 📢 Morning Close | Morning session summary |
+| 13:00 | 📢 Afternoon Open | Afternoon session start |
+| 14:55 | 📢 Pre-close | Pre-market close reminder |
+| 15:00 | 📊 Daily Summary | Full day summary with historical data |
 
 ---
 
@@ -89,51 +94,17 @@ systemctl start stock-monitor
 - ⏰ **定时提醒**：交易日内 5 次定时推送
 - 💾 **数据持久化**：SQLite 数据库存储历史价格
 - ☁️ **云服务器支持**：24小时不间断运行
-
-### 🚀 快速开始
-
-#### 1. 克隆并安装
-
-```bash
-git clone https://github.com/yourusername/stock-monitor.git
-cd stock-monitor
-pip3 install -r requirements.txt
-```
-
-#### 2. 配置
-
-```bash
-python3 setup.py
-```
-
-按提示输入 Bark Key 和自选股列表。
-
-#### 3. 运行
-
-```bash
-python3 stock_monitor.py
-```
+- 🔧 **轻松配置**：首次运行配置向导
 
 ### 📱 推送时间表
 
-| 时间 | 类型 |
-|------|------|
-| 09:30 | 🌅 开盘提醒 |
-| 11:25 | 📢 上午收盘 |
-| 13:00 | 📢 下午开盘 |
-| 14:55 | 📢 收盘前提醒 |
-| 15:00 | 📊 全日总结 |
-
-### ☁️ 云服务器部署
-
-```bash
-# 上传到服务器
-scp stock-monitor-deploy.tar.gz root@server:/opt/
-
-# 设置开机自启
-systemctl enable stock-monitor
-systemctl start stock-monitor
-```
+| 时间 | 类型 | 说明 |
+|------|------|------|
+| 09:30 | 🌅 开盘提醒 | 开盘价和初始状态 |
+| 11:25 | 📢 上午收盘 | 上午盘总结 |
+| 13:00 | 📢 下午开盘 | 下午盘开始 |
+| 14:55 | 📢 收盘前提醒 | 收盘前提醒 |
+| 15:00 | 📊 全日总结 | 包含历史数据的全日总结 |
 
 ---
 
@@ -172,10 +143,34 @@ systemctl start stock-monitor
 stock-monitor/
 ├── stock_monitor.py      # Main program / 主程序
 ├── setup.py              # Setup wizard / 配置向导
+├── launcher_mac.py       # macOS launcher / macOS 启动器
+├── build_mac.py          # macOS build script / macOS 构建脚本
+├── build_windows.py      # Windows build script / Windows 构建脚本
 ├── config.example.json   # Example config / 示例配置
 ├── start.sh              # Start script / 启动脚本
 ├── test_install.py       # Test script / 测试脚本
-└── README.md             # This file / 本文件
+├── README.md             # This file / 本文件
+└── RELEASES.md           # Release notes / 发布说明
+```
+
+---
+
+## Building from Source / 从源码构建
+
+### macOS
+
+```bash
+pip3 install pyinstaller
+python3 build_mac.py
+# Output: dist/StockMonitor.app
+```
+
+### Windows
+
+```bash
+pip3 install pyinstaller
+python3 build_windows.py
+# Output: dist/StockMonitor.exe
 ```
 
 ---
@@ -187,6 +182,16 @@ MIT License - See [LICENSE](LICENSE)
 ## Contributing / 贡献
 
 Issues and Pull Requests are welcome! / 欢迎提交 Issue 和 Pull Request！
+
+Contributions especially welcome for:
+- Windows pre-built binary
+- Additional stock market support
+- UI improvements
+
+特别欢迎以下贡献：
+- Windows 预构建版本
+- 支持更多股市
+- 界面改进
 
 ## Acknowledgments / 致谢
 
