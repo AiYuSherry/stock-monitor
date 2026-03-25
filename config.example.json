@@ -1,0 +1,47 @@
+{
+    "_comment": "Stock Monitor Configuration / 股票监测程序配置",
+    "bark_key": "YOUR_BARK_KEY_HERE / 在此处填写你的Bark Key",
+    "bark_sound": "none",
+    "stocks": [
+        {"code": "sh518880", "name": "Gold ETF / 黄金ETF", "cost_price": 0},
+        {"code": "sz161226", "name": "Silver Fund / 国投白银LOF", "cost_price": 0},
+        {"code": "sh512400", "name": "Non-ferrous Metals ETF / 有色金属ETF", "cost_price": 0},
+        {"code": "sz399006", "name": "ChiNext Index / 创业板指", "cost_price": 0}
+    ],
+    "market_indices": [
+        {"code": "sh000001", "name": "Shanghai Composite / 上证指数"}
+    ],
+    "alert_threshold": {
+        "_comment": "Alert thresholds in percentage / 告警阈值（百分比）",
+        "single_day": {
+            "drop_level1": -3.0,
+            "drop_level2": -5.0,
+            "drop_level3": -8.0,
+            "rise_level1": 5.0
+        },
+        "cumulative": {
+            "drop_3day": -5.0,
+            "drop_5day": -10.0,
+            "drop_10day": -20.0,
+            "drop_15day": -30.0,
+            "rise_10day": 25.0,
+            "rise_15day": 50.0
+        },
+        "based_on_cost": {
+            "stop_loss": -10.0,
+            "stop_profit_1": 15.0,
+            "stop_profit_2": 30.0,
+            "stop_profit_3": 50.0
+        }
+    },
+    "schedule": {
+        "_comment": "Push notification schedule (24h format) / 推送时间表（24小时制）",
+        "market_open": "09:30",
+        "morning_end": "11:25",
+        "afternoon_open": "13:00",
+        "afternoon_remind": "14:55",
+        "market_close": "15:00"
+    },
+    "trading_days_only": true,
+    "refresh_interval_minutes": 5
+}

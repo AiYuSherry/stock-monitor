@@ -1,0 +1,38 @@
+# Configuration file (contains sensitive info) / 配置文件（含敏感信息）
+config.json
+
+# Database files / 数据库文件
+stock_data.db
+*.db
+
+# Log files / 日志文件
+*.log
+
+# Python cache / Python 缓存
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+
+# Virtual environments / 虚拟环境
+venv/
+env/
+ENV/
+.venv
+
+# IDE settings / IDE 设置
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# System files / 系统文件
+.DS_Store
+Thumbs.db
+
+# Deployment packages / 部署包
+stock-monitor-deploy.tar.gz
+deploy/
