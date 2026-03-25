@@ -20,22 +20,14 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install pyinstaller
-        pip install schedule requests
+        pip install -r requirements.txt
     
     - name: Build macOS app
       run: |
-        pyinstaller --onefile --windowed \
-          --name StockMonitor \
-          --add-data "config.example.json:." \
-          --hidden-import schedule \
-          --hidden-import requests \
-          --hidden-import sqlite3 \
-          stock_monitor.py
+        pyinstaller --onefile --windowed --name StockMonitor --add-data "config.example.json:." stock_monitor.py
     
     - name: Package macOS app
-      run: |
-        cd dist && zip -r StockMonitor-mac.zip StockMonitor
-        ls -la
+      run: cd dist && zip -r StockMonitor-mac.zip StockMonitor
     
     - name: Upload macOS artifact
       uses: actions/upload-artifact@v3
@@ -57,25 +49,15 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install pyinstaller
-        pip install schedule requests
+        pip install -r requirements.txt
     
     - name: Build Windows executable
-      run: |
-        pyinstaller --onefile --windowed `
-          --name StockMonitor `
-          --add-data "config.example.json;." `
-          --hidden-import schedule `
-          --hidden-import requests `
-          --hidden-import sqlite3 `
-          stock_monitor.py
-      shell: pwsh
+      run: pyinstaller --onefile --windowed --name StockMonitor --add-data "config.example.json;." stock_monitor.py
     
     - name: Package Windows exe
       run: |
         cd dist
-        7z a StockMonitor-windows.zip StockMonitor.exe
-        dir
-      shell: cmd
+        tar -czf StockMonitor-windows.zip StockMonitor.exe
     
     - name: Upload Windows artifact
       uses: actions/upload-artifact@v3
@@ -88,41 +70,29 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Download macOS artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: StockMonitor-mac
-        path: dist/
-    
-    - name: Download Windows artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: StockMonitor-windows
-        path: dist/
+    - uses: actions/download-artifact@v3
     
     - name: List files
-      run: ls -la dist/
+      run: ls -R
     
     - name: Create Release
       uses: softprops/action-gh-release@v1
       with:
         files: |
-          dist/StockMonitor-mac.zip
-          dist/StockMonitor-windows.zip
+          StockMonitor-mac/StockMonitor-mac.zip
+          StockMonitor-windows/StockMonitor-windows.zip
         body: |
           🎉 New Release!
           
           ## 📦 Downloads
-          
-          | Platform | File | Size |
-          |----------|------|------|
-          | macOS | StockMonitor-mac.zip | ~17MB |
-          | Windows | StockMonitor-windows.zip | ~12MB |
+          | Platform | File |
+          |----------|------|
+          | macOS | StockMonitor-mac.zip |
+          | Windows | StockMonitor-windows.zip |
           
           ## 🚀 Quick Start
           1. Download for your platform
           2. Extract and run
           3. Enter Bark Key on first run
-          4. Done!
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
