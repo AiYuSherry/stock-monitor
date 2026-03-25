@@ -88,49 +88,45 @@ xattr -cr /Applications/StockMonitor.app
 
 ### Status / 状态
 
-🔨 **Build from source required**
+✅ **Auto-build via GitHub Actions**
 
-Windows version currently requires building from source on a Windows PC.
+Windows version is automatically built by GitHub Actions for every release.
 
-Windows 版本目前需要在 Windows 电脑上从源码构建。
+Windows 版本由 GitHub Actions 自动构建。
 
-### Build Instructions / 构建说明
+### Download / 下载
 
-1. **Install Python** / 安装 Python
-   - Download from [python.org](https://python.org)
-   - 从 [python.org](https://python.org) 下载
-   - Make sure to check "Add Python to PATH"
-   - 确保勾选"Add Python to PATH"
+Download directly from the [Releases](../../releases) page:
+- `StockMonitor-windows.zip` (~12MB)
 
-2. **Clone Repository** / 克隆仓库
+直接从 [Releases](../../releases) 页面下载：
+- `StockMonitor-windows.zip` (~12MB)
+
+### Install & Run / 安装与运行
+
+1. **Download** / 下载
    ```bash
-   git clone https://github.com/AiYuSherry/stock-monitor.git
-   cd stock-monitor
+   curl -L -o StockMonitor-windows.zip https://github.com/AiYuSherry/stock-monitor/releases/latest/download/StockMonitor-windows.zip
    ```
+   Or click the link on the releases page / 或直接点击发布页面链接
 
-3. **Install Dependencies** / 安装依赖
-   ```bash
-   pip install pyinstaller
-   ```
+2. **Extract** / 解压
+   - Right-click the zip file → "Extract All"
+   - 右键 zip 文件 → "解压全部"
 
-4. **Build** / 构建
-   ```bash
-   python build_windows.py
-   ```
+3. **Run** / 运行
+   - Double-click `StockMonitor.exe`
+   - 双击 `StockMonitor.exe`
 
-5. **Output** / 输出
-   - Located in `dist/StockMonitor.exe`
-   - 位于 `dist/StockMonitor.exe`
+4. **First Time Setup** / 首次配置
+   - A terminal window will appear for configuration
+   - 会弹出终端窗口进行配置
+   - Enter your Bark Key and select stocks
+   - 输入 Bark Key 和选择股票
 
-### Want to contribute a Windows build? / 想贡献 Windows 构建版本？
-
-If you build the Windows version, consider sharing it by:
-- Creating a Pull Request with the binary
-- Or opening an Issue with the file attached
-
-如果您构建了 Windows 版本，考虑通过以下方式分享：
-- 创建包含二进制文件的 Pull Request
-- 或在 Issue 中附加文件
+5. **Done!** / 完成！
+   - The program runs in the background
+   - 程序在后台运行
 
 ---
 

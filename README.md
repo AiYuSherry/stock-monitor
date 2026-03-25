@@ -16,14 +16,14 @@ A Python-based stock monitoring program that tracks stock/ETF prices in real-tim
 
 | Platform | Download | Size | Status |
 |----------|----------|------|--------|
-| **macOS** | [StockMonitor-mac.zip](https://github.com/AiYuSherry/stock-monitor/releases/download/v1.0.0/StockMonitor-mac.zip) | ~17MB | ✅ Available |
-| **Windows** | StockMonitor-windows.zip | ~12MB | 🔨 Build from source |
+| **macOS** | [StockMonitor-mac.zip](https://github.com/AiYuSherry/stock-monitor/releases/latest/download/StockMonitor-mac.zip) | ~17MB | ✅ Available |
+| **Windows** | [StockMonitor-windows.zip](https://github.com/AiYuSherry/stock-monitor/releases/latest/download/StockMonitor-windows.zip) | ~12MB | ✅ Auto-build |
 
 📖 [Installation Guide / 安装指南](RELEASES.md)
 
-> **Windows Users:** Windows version needs to be built from source on a Windows PC. See [build_windows.py](build_windows.py) or wait for community contribution.
+> **Auto-build:** Windows version is automatically built by GitHub Actions. Download directly from the link above.
 >
-> **Windows 用户：** Windows 版本需要在 Windows 电脑上从源码构建。查看 [build_windows.py](build_windows.py) 或等待社区贡献。
+> **自动构建：** Windows 版本由 GitHub Actions 自动构建。直接点击上方链接下载即可。
 
 ---
 
