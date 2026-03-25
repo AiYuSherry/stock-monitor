@@ -8,6 +8,21 @@ A Python-based stock monitoring program that tracks stock/ETF prices in real-tim
 
 ---
 
+## 📥 Download / 下载
+
+**No installation required!** Download and run directly.
+
+**无需安装！**下载直接运行。
+
+| Platform | Download | Size |
+|----------|----------|------|
+| **macOS** | [StockMonitor-mac.zip](../../releases) | ~15MB |
+| **Windows** | [StockMonitor-windows.zip](../../releases) | ~12MB |
+
+📖 [Installation Guide / 安装指南](RELEASES.md)
+
+---
+
 ## English Documentation
 
 ### ✨ Features
