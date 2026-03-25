@@ -1,4 +1,4 @@
-name: Build & Release
+name: Build
 
 on:
   push:
@@ -10,89 +10,42 @@ jobs:
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v3
-    
-    - name: Set up Python
-      uses: actions/setup-python@v4
+    - uses: actions/setup-python@v4
       with:
         python-version: '3.11'
-    
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install pyinstaller
-        pip install -r requirements.txt
-    
-    - name: Build macOS app
-      run: |
-        pyinstaller --onefile --windowed --name StockMonitor --add-data "config.example.json:." stock_monitor.py
-    
-    - name: Package macOS app
-      run: cd dist && zip -r StockMonitor-mac.zip StockMonitor
-    
-    - name: Upload macOS artifact
-      uses: actions/upload-artifact@v3
+    - run: pip install pyinstaller schedule requests
+    - run: pyinstaller --onefile --windowed --name StockMonitor stock_monitor.py
+    - run: cd dist && zip -r StockMonitor-mac.zip StockMonitor
+    - uses: actions/upload-artifact@v3
       with:
-        name: StockMonitor-mac
+        name: mac
         path: dist/StockMonitor-mac.zip
 
   build-windows:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v3
-    
-    - name: Set up Python
-      uses: actions/setup-python@v4
+    - uses: actions/setup-python@v4
       with:
         python-version: '3.11'
-    
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install pyinstaller
-        pip install -r requirements.txt
-    
-    - name: Build Windows executable
-      run: pyinstaller --onefile --windowed --name StockMonitor --add-data "config.example.json;." stock_monitor.py
-    
-    - name: Package Windows exe
-      run: |
-        cd dist
-        tar -czf StockMonitor-windows.zip StockMonitor.exe
-    
-    - name: Upload Windows artifact
-      uses: actions/upload-artifact@v3
+    - run: pip install pyinstaller schedule requests
+    - run: pyinstaller --onefile --windowed --name StockMonitor stock_monitor.py
+    - run: cd dist; tar -czf StockMonitor-windows.zip StockMonitor.exe
+      shell: powershell
+    - uses: actions/upload-artifact@v3
       with:
-        name: StockMonitor-windows
+        name: win
         path: dist/StockMonitor-windows.zip
 
-  create-release:
+  release:
     needs: [build-macos, build-windows]
     runs-on: ubuntu-latest
-    
     steps:
     - uses: actions/download-artifact@v3
-    
-    - name: List files
-      run: ls -R
-    
-    - name: Create Release
-      uses: softprops/action-gh-release@v1
+    - uses: softprops/action-gh-release@v1
       with:
         files: |
-          StockMonitor-mac/StockMonitor-mac.zip
-          StockMonitor-windows/StockMonitor-windows.zip
-        body: |
-          🎉 New Release!
-          
-          ## 📦 Downloads
-          | Platform | File |
-          |----------|------|
-          | macOS | StockMonitor-mac.zip |
-          | Windows | StockMonitor-windows.zip |
-          
-          ## 🚀 Quick Start
-          1. Download for your platform
-          2. Extract and run
-          3. Enter Bark Key on first run
+          mac/StockMonitor-mac.zip
+          win/StockMonitor-windows.zip
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
